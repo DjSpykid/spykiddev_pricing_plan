@@ -1,0 +1,159 @@
+
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Check, Crown, Rocket } from "lucide-react";
+
+const plans = [
+  {
+    name: "Starter",
+    price: "₦7,500",
+    description:
+      "A solid launchpad for emerging brands seeking professional online presence.",
+    features: [
+      "Custom storefront aligned with your brand identity (logo, colors, typography)",
+      "Unlimited product listings with full support for variations, discounts, and SEO-optimized slugs",
+      "Integrated checkout with Credo, Paystack, or Flutterwave",
+      "Mobile-responsive, SSL-secured design",
+      "Homepage modules: Featured, Best Sellers, Sales, and New Arrivals",
+      "Search + smart filtering (in-stock, discounted, featured)",
+      "Customer order tracking with downloadable invoices",
+      "Promotions manager: flash sales & discount codes with expiry",
+      "Customer ledger: purchase history, contact info, order value",
+      "Store pickup & delivery setup with flexible pricing",
+      "Google & email authentication",
+      "Real-time order notifications via email for admins",
+      "Branded business email setup (e.g. info@yourstore.com)",
+      "Full ownership — your store and domain belong entirely to you",
+      "Personalized onboarding session for smooth launch",
+      "Email & chat support",
+    ],
+    icon: Rocket,
+    popular: false,
+  },
+  {
+    name: "Pro",
+    price: "₦15,000",
+    description:
+      "Advanced features, deeper analytics, and priority support for scaling businesses.",
+    features: [
+      "Everything in Starter",
+      "Unlimited product listings with advanced categorisation, smart filters, and SEO-ready architecture",
+      "Comprehensive analytics dashboard (conversion, revenue, returns, AOV)",
+      "Sales intelligence: top products, status distribution, time-based filtering",
+      "SEO optimisation suite: metadata, semantic slugs, search readiness",
+      "Marketing accelerators: vouchers, campaigns, multi-layer flash sales",
+      "Customer engagement: loyalty insights, WhatsApp entry points, rich contact forms",
+      "Delivery orchestration with rider assignment workflow",
+      "Smart notifications: instant alerts via WhatsApp and email for new orders",
+      "Extended brand canvas: blog, gallery, and auxiliary pages",
+      "Priority onboarding & premium support response times",
+      "Branded business email setup (e.g. hello@yourbrand.com)",
+      "Full ownership — your store and domain belong entirely to you",
+      "Dedicated WhatsApp/Telegram support group for faster help",
+    ],
+    icon: Crown,
+    popular: true,
+  },
+];
+
+export default function Pricing() {
+  return (
+    <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+            Get a professional e-commerce website with{" "}
+            <span className="text-primary">advanced tools</span> to grow sales
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Full ownership, branded email, and personalized marketing support
+            included. Whether you’re just launching or scaling to new heights,
+            our plans deliver everything you need to dominate online.
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {plans.map((plan) => {
+            const IconComponent = plan.icon;
+            return (
+              <Card
+                key={plan.name}
+                className={`relative transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                  plan.popular
+                    ? "border-primary shadow-lg scale-105 bg-card"
+                    : "hover:border-primary/50"
+                }`}
+              >
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground">
+                    Most Popular
+                  </Badge>
+                )}
+
+                <CardHeader className="text-center pb-4">
+                  <div
+                    className={`w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center ${
+                      plan.popular
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  <CardTitle className="text-2xl font-bold">
+                    {plan.name}
+                  </CardTitle>
+                  <div className="text-3xl font-bold text-primary">
+                    {plan.price}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      /setup
+                    </span>
+                  </div>
+                  <CardDescription className="text-sm">
+                    {plan.description}
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-card-foreground">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </CardContent>
+
+                <CardFooter>
+                  <Button
+                    asChild
+                    className={`w-full transition-all duration-300 ${
+                      plan.popular
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                    }`}
+                  >
+                    <a href="/contact">Choose {plan.name}</a>
+                  </Button>
+                </CardFooter>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
