@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -11,12 +10,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Crown, Rocket } from "lucide-react";
+import { Check, Crown, Rocket, Info } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const plans = [
   {
     name: "Starter",
-    price: "₦7,500",
+    price: "₦5,000",
     description:
       "A solid launchpad for emerging brands seeking professional online presence.",
     features: [
@@ -42,25 +49,25 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "₦15,000",
+    price: "₦10,000",
     description:
       "Advanced features, deeper analytics, and priority support for scaling businesses.",
-    features: [
-      "Everything in Starter",
-      "Unlimited product listings with advanced categorisation, smart filters, and SEO-ready architecture",
-      "Comprehensive analytics dashboard (conversion, revenue, returns, AOV)",
-      "Sales intelligence: top products, status distribution, time-based filtering",
-      "SEO optimisation suite: metadata, semantic slugs, search readiness",
-      "Marketing accelerators: vouchers, campaigns, multi-layer flash sales",
-      "Customer engagement: loyalty insights, WhatsApp entry points, rich contact forms",
-      "Delivery orchestration with rider assignment workflow",
-      "Smart notifications: instant alerts via WhatsApp and email for new orders",
-      "Extended brand canvas: blog, gallery, and auxiliary pages",
-      "Priority onboarding & premium support response times",
-      "Branded business email setup (e.g. hello@yourbrand.com)",
-      "Full ownership — your store and domain belong entirely to you",
-      "Dedicated WhatsApp/Telegram support group for faster help",
-    ],
+   features: [
+  "Everything in Starter",
+  "Unlimited product listings with advanced categorisation, smart filters, and SEO-ready architecture",
+  "Comprehensive analytics dashboard (conversion, revenue, returns, AOV)",
+  "Sales intelligence: top products, status distribution, time-based filtering",
+  "SEO optimisation suite: metadata, semantic slugs, search readiness",
+  "Marketing accelerators: vouchers, flash sales & discount codes (per product)",
+  "Customer insights: track repeat buyers and purchase history",
+  "Delivery orchestration with rider/agent assignment workflow",
+  "Smart notifications: instant alerts via WhatsApp and email for new orders",
+  "Order management extras: admins can create orders manually for physical store, WhatsApp, Instagram, TikTok, Facebook, or Snapchat",
+  "Export orders and reports as CSV for offline use",
+  "Premium onboarding session + personal support calls (Zoom, Google Meet, or phone)",
+  "Branded business email setup (e.g. hello@yourbrand.com)",
+  "Full ownership — your store and domain belong entirely to you",
+],
     icon: Crown,
     popular: true,
   },
@@ -68,7 +75,7 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -80,6 +87,77 @@ export default function Pricing() {
             Full ownership, branded email, and personalized marketing support
             included. Whether you’re just launching or scaling to new heights,
             our plans deliver everything you need to dominate online.
+          </p>
+        </div>
+
+        {/* Pricing Structure Explanation */}
+        <div className="mb-12 text-center">
+          <h2 className="text-2xl font-semibold mb-4">
+            Simple, Transparent Pricing
+          </h2>
+          <p className="text-muted-foreground max-w-3xl mx-auto">
+            Your chosen plan (Starter or Pro) includes hosting and all website
+            features. The only extra cost is your domain name (e.g., .com,
+            .com.ng, .shop), which you purchase and renew yearly through a
+            registrar.{" "}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="link" className="p-0 text-primary">
+                  Learn More <Info className="w-4 h-4 ml-1" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Pricing Breakdown</DialogTitle>
+                  <DialogDescription>
+                    Here’s how our pricing works:
+                    <ul className="mt-4 space-y-3 text-left">
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-primary mt-0.5" />
+                        <span>
+                          <strong>One-Time Setup Fee</strong>: Pay ₦5,000
+                          (Starter) or ₦10,000 (Pro) to set up your website,
+                          including hosting, design, and all features listed in
+                          your plan.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-primary mt-0.5" />
+                        <span>
+                          <strong>Domain Cost</strong>: You’ll purchase your
+                          domain (e.g., .com, .com.ng, .shop) upfront through a
+                          registrar. Costs vary by domain type (e.g., ~₦7,500 for
+                          .com.ng, ~₦10,000 for .com).
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-primary mt-0.5" />
+                        <span>
+                          <strong>Hosting Included</strong>: Your plan includes
+                          hosting, so you only pay the setup fee and your yearly
+                          domain cost no extra monthly hosting fees.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-primary mt-0.5" />
+                        <span>
+                          <strong>Annual Domain Renewal</strong>: Renew your
+                          domain yearly through the registrar to keep your website
+                          active.
+                        </span>
+                      </li>
+                    </ul>
+                    <p className="mt-4">
+                      Need help?{" "}
+                      <a href="/contact" className="text-primary hover:underline">
+                        Contact us
+                      </a>{" "}
+                      for personalized support.
+                    </p>
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </p>
         </div>
 
@@ -118,12 +196,15 @@ export default function Pricing() {
                   <div className="text-3xl font-bold text-primary">
                     {plan.price}
                     <span className="text-sm font-normal text-muted-foreground">
-                      /setup
+                      /month
                     </span>
                   </div>
                   <CardDescription className="text-sm">
                     {plan.description}
                   </CardDescription>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    + Yearly domain cost
+                  </p>
                 </CardHeader>
 
                 <CardContent className="space-y-3">

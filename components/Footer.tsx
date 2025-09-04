@@ -9,7 +9,7 @@ export default function Footer() {
             Done-for-you deployment
           </p>
           <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Simply provide your logo, brand colors, and product details—we
+            Simply provide your logo and brand colors we
             handle setup, configuration, and launch.
           </p>
         </div>

@@ -46,7 +46,7 @@ export default function HomePage() {
             </div>
             <h3 className="text-xl font-bold mb-2">Full Ownership</h3>
             <p className="text-muted-foreground">
-              Your store, your domain, your data—complete control with no hidden
+              Your store, your domain, your data complete control with no hidden
               fees or restrictions.
             </p>
           </div>
