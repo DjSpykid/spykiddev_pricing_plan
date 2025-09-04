@@ -30,6 +30,7 @@ export default function RootLayout({
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
       >
         <Header />
+        
         <main>{children}</main>
         <Footer />
         <Analytics />
