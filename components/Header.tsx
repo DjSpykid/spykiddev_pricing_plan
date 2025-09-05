@@ -24,13 +24,29 @@ export default function Header() {
           </h1>
         </div>
         <nav className="hidden sm:flex gap-6">
-          <a href="/pricing" className="text-muted-foreground hover:text-primary transition-colors">
+          <a
+            href="/projects"
+            className="text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Projects
+          </a>
+          <a
+            href="/pricing"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
             Pricing
           </a>
-          <a href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+          <a
+            href="/contact"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
             Contact
           </a>
-          <a href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+          <a
+            href="/about"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
             About
           </a>
         </nav>
@@ -41,11 +57,22 @@ export default function Header() {
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMenuOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
         </Button>
       </div>
       {isMenuOpen && (
         <nav className="sm:hidden mt-4 flex flex-col items-center gap-4">
+          <a
+            href="/projects"
+            className="text-muted-foreground hover:text-primary transition-colors text-lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Projects
+          </a>
           <a
             href="/pricing"
             className="text-muted-foreground hover:text-primary transition-colors text-lg"
@@ -70,5 +97,5 @@ export default function Header() {
         </nav>
       )}
     </header>
-  )
+  );
 }
