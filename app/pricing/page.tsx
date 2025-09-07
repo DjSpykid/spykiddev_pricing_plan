@@ -25,7 +25,15 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const plans = [
   {
     name: "Starter",
-    price: "₦5,000",
+    prices: {
+      monthly: "₦5,000",
+      quarterly: "₦13,500",
+      yearly: "₦50,000",
+    },
+    savings: {
+      quarterly: "Save 10%",
+      yearly: "Save ~17%",
+    },
     description:
       "A solid launchpad for emerging brands seeking professional online presence.",
     features: [
@@ -63,7 +71,7 @@ const plans = [
       yearly: "Save ~17%",
     },
     promo: {
-      text: "Launch Offer – ₦9,000 for first 5 customers, valid till Dec 31, 2025.",
+      text: "Launch Offer – ₦9,000 for first 3 customers, valid till Dec 31, 2025.",
       active: true,
     },
     description:
@@ -240,9 +248,7 @@ export default function Pricing() {
                     {plan.name}
                   </CardTitle>
                   <div className="text-3xl font-bold text-primary">
-                    {plan.name === "Pro"
-                      ? plan.prices[billingCycle]
-                      : plan.price}
+                    {plan.prices[billingCycle]}
                     <span className="text-sm font-normal text-muted-foreground">
                       {billingCycle === "monthly"
                         ? "/month"
@@ -251,7 +257,7 @@ export default function Pricing() {
                         : "/year"}
                     </span>
                   </div>
-                  {plan.name === "Pro" && plan.savings[billingCycle] && (
+                  {plan.savings?.[billingCycle] && (
                     <Badge className="mt-2 bg-green-100 text-green-800">
                       {plan.savings[billingCycle]}
                     </Badge>
@@ -307,19 +313,3 @@ export default function Pricing() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
