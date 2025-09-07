@@ -27,7 +27,7 @@ const projects: Project[] = [
     description:
       "A modern e-commerce platform built for TrendyBase, featuring product browsing, cart management, and secure payments for a seamless shopping experience in Lagos.",
     imagePath: "/projects/trendybase.jpeg",
-    projectUrl: "www.trendybase.com.ng",
+    projectUrl: "https://www.trendybase.com.ng",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const projects: Project[] = [
     description:
       "A robust e-commerce platform built for EssentialsByTems, inspired by Amazon, offering a wide range of products, seamless browsing, cart management, and secure payments tailored for the Nigerian market.",
     imagePath: "/projects/essentials.jpeg",
-    projectUrl: "www.essentialsbytems.com",
+    projectUrl: "https://www.essentialsbytems.com",
   },
   {
     id: 3,

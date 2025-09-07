@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const plans = [
   {
@@ -44,36 +46,54 @@ const plans = [
       "Personalized onboarding session for smooth launch",
       "Email & chat support",
     ],
+    note: "Currently in development — launching soon for small businesses.",
     icon: Rocket,
     popular: false,
+    disabled: true,
   },
   {
     name: "Pro",
-    price: "₦10,000",
+    prices: {
+      monthly: "₦10,000",
+      quarterly: "₦27,000",
+      yearly: "₦100,000",
+    },
+    savings: {
+      quarterly: "Save 10%",
+      yearly: "Save ~17%",
+    },
+    promo: {
+      text: "Launch Offer – ₦9,000 for first 5 customers, valid till Dec 31, 2025.",
+      active: true,
+    },
     description:
       "Advanced features, deeper analytics, and priority support for scaling businesses.",
-   features: [
-  "Everything in Starter",
-  "Unlimited product listings with advanced categorisation, smart filters, and SEO-ready architecture",
-  "Comprehensive analytics dashboard (conversion, revenue, returns, AOV)",
-  "Sales intelligence: top products, status distribution, time-based filtering",
-  "SEO optimisation suite: metadata, semantic slugs, search readiness",
-  "Marketing accelerators: vouchers, flash sales & discount codes (per product)",
-  "Customer insights: track repeat buyers and purchase history",
-  "Delivery orchestration with rider/agent assignment workflow",
-  "Smart notifications: instant alerts via WhatsApp and email for new orders",
-  "Order management extras: admins can create orders manually for physical store, WhatsApp, Instagram, TikTok, Facebook, or Snapchat",
-  "Export orders and reports as CSV for offline use",
-  "Premium onboarding session + personal support calls (Zoom, Google Meet, or phone)",
-  "Branded business email setup (e.g. hello@yourbrand.com)",
-  "Full ownership — your store and domain belong entirely to you",
-],
+    features: [
+      "Everything in Starter",
+      "Unlimited product listings with advanced categorisation, smart filters, and SEO-ready architecture",
+      "Comprehensive analytics dashboard (conversion, revenue, returns, AOV)",
+      "Sales intelligence: top products, status distribution, time-based filtering",
+      "SEO optimisation suite: metadata, semantic slugs, search readiness",
+      "Marketing accelerators: vouchers, flash sales & discount codes (per product)",
+      "Customer insights: track repeat buyers and purchase history",
+      "Delivery orchestration with rider/agent assignment workflow",
+      "Smart notifications: instant alerts via WhatsApp and email for new orders",
+      "Order management extras: admins can create orders manually for physical store, WhatsApp, Instagram, TikTok, Facebook, or Snapchat",
+      "Export orders and reports as CSV for offline use",
+      "Premium onboarding session + personal support calls (Zoom, Google Meet, or phone)",
+      "Branded business email setup (e.g. hello@yourbrand.com)",
+      "Full ownership — your store and domain belong entirely to you",
+    ],
     icon: Crown,
     popular: true,
   },
 ];
 
 export default function Pricing() {
+  const [billingCycle, setBillingCycle] = useState<
+    "monthly" | "quarterly" | "yearly"
+  >("monthly");
+
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-5xl mx-auto">
@@ -88,6 +108,22 @@ export default function Pricing() {
             included. Whether you’re just launching or scaling to new heights,
             our plans deliver everything you need to dominate online.
           </p>
+        </div>
+
+        {/* Billing Cycle Toggle */}
+        <div className="flex justify-center mb-8">
+          <Tabs
+            defaultValue="monthly"
+            onValueChange={(value) =>
+              setBillingCycle(value as "monthly" | "quarterly" | "yearly")
+            }
+          >
+            <TabsList className="grid w-[300px] grid-cols-3">
+              <TabsTrigger value="monthly">Monthly</TabsTrigger>
+              <TabsTrigger value="quarterly">Quarterly</TabsTrigger>
+              <TabsTrigger value="yearly">Yearly</TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
 
         {/* Pricing Structure Explanation */}
@@ -116,7 +152,7 @@ export default function Pricing() {
                         <Check className="w-4 h-4 text-primary mt-0.5" />
                         <span>
                           <strong>One-Time Setup Fee</strong>: Pay ₦5,000
-                          (Starter) or ₦10,000 (Pro) to set up your website,
+                          (Starter) or as per plan (Pro) to set up your website,
                           including hosting, design, and all features listed in
                           your plan.
                         </span>
@@ -126,8 +162,8 @@ export default function Pricing() {
                         <span>
                           <strong>Domain Cost</strong>: You’ll purchase your
                           domain (e.g., .com, .com.ng, .shop) upfront through a
-                          registrar. Costs vary by domain type (e.g., ~₦7,500 for
-                          .com.ng, ~₦10,000 for .com).
+                          registrar. Costs vary by domain type (e.g., ~₦7,500
+                          for .com.ng, ~₦10,000 for .com).
                         </span>
                       </li>
                       <li className="flex items-start gap-2">
@@ -142,14 +178,17 @@ export default function Pricing() {
                         <Check className="w-4 h-4 text-primary mt-0.5" />
                         <span>
                           <strong>Annual Domain Renewal</strong>: Renew your
-                          domain yearly through the registrar to keep your website
-                          active.
+                          domain yearly through the registrar to keep your
+                          website active.
                         </span>
                       </li>
                     </ul>
                     <p className="mt-4">
                       Need help?{" "}
-                      <a href="/contact" className="text-primary hover:underline">
+                      <a
+                        href="/contact"
+                        className="text-primary hover:underline"
+                      >
                         Contact us
                       </a>{" "}
                       for personalized support.
@@ -171,12 +210,19 @@ export default function Pricing() {
                 className={`relative transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
                   plan.popular
                     ? "border-primary shadow-lg scale-105 bg-card"
+                    : plan.disabled
+                    ? "opacity-60 pointer-events-none bg-muted"
                     : "hover:border-primary/50"
                 }`}
               >
                 {plan.popular && (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground">
                     Most Popular
+                  </Badge>
+                )}
+                {plan.disabled && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-500 text-white">
+                    Coming Soon
                   </Badge>
                 )}
 
@@ -194,17 +240,38 @@ export default function Pricing() {
                     {plan.name}
                   </CardTitle>
                   <div className="text-3xl font-bold text-primary">
-                    {plan.price}
+                    {plan.name === "Pro"
+                      ? plan.prices[billingCycle]
+                      : plan.price}
                     <span className="text-sm font-normal text-muted-foreground">
-                      /month
+                      {billingCycle === "monthly"
+                        ? "/month"
+                        : billingCycle === "quarterly"
+                        ? "/quarter"
+                        : "/year"}
                     </span>
                   </div>
+                  {plan.name === "Pro" && plan.savings[billingCycle] && (
+                    <Badge className="mt-2 bg-green-100 text-green-800">
+                      {plan.savings[billingCycle]}
+                    </Badge>
+                  )}
                   <CardDescription className="text-sm">
                     {plan.description}
                   </CardDescription>
                   <p className="text-xs text-muted-foreground mt-2">
                     + Yearly domain cost
                   </p>
+                  {plan.note && (
+                    <p className="text-xs text-muted-foreground mt-2 italic">
+                      {plan.note}
+                    </p>
+                  )}
+                  {plan.promo?.active && (
+                    <Badge className="mt-3 bg-green-500 text-white text-xs sm:text-sm font-medium py-1 px-3 max-w-[90%] mx-auto">
+                      {plan.promo.text}
+                    </Badge>
+                  )}
                 </CardHeader>
 
                 <CardContent className="space-y-3">
@@ -218,18 +285,20 @@ export default function Pricing() {
                   ))}
                 </CardContent>
 
-                <CardFooter>
-                  <Button
-                    asChild
-                    className={`w-full transition-all duration-300 ${
-                      plan.popular
-                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                        : "bg-secondary hover:bg-secondary/90 text-secondary-foreground"
-                    }`}
-                  >
-                    <a href="/contact">Choose {plan.name}</a>
-                  </Button>
-                </CardFooter>
+                {!plan.disabled && (
+                  <CardFooter>
+                    <Button
+                      asChild
+                      className={`w-full transition-all duration-300 ${
+                        plan.popular
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                      }`}
+                    >
+                      <a href="/contact">Choose {plan.name}</a>
+                    </Button>
+                  </CardFooter>
+                )}
               </Card>
             );
           })}
@@ -238,3 +307,19 @@ export default function Pricing() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
