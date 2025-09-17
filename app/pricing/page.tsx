@@ -49,7 +49,6 @@ const plans = [
       "Store pickup & delivery setup with flexible pricing",
       "Google & email authentication",
       "Real-time order notifications via email for admins",
-      "Branded business email setup (e.g. info@yourstore.com)",
       "Full ownership — your store and domain belong entirely to you",
       "Personalized onboarding session for smooth launch",
       "Email & chat support",
@@ -89,7 +88,6 @@ const plans = [
       "Order management extras: admins can create orders manually for physical store, WhatsApp, Instagram, TikTok, Facebook, or Snapchat",
       "Export orders and reports as CSV for offline use",
       "Premium onboarding session + personal support calls (Zoom, Google Meet, or phone)",
-      "Branded business email setup (e.g. hello@yourbrand.com)",
       "Full ownership — your store and domain belong entirely to you",
     ],
     icon: Crown,
@@ -112,7 +110,7 @@ export default function Pricing() {
             <span className="text-primary">advanced tools</span> to grow sales
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Full ownership, branded email, and personalized marketing support
+            Full ownership and personalized marketing support
             included. Whether you’re just launching or scaling to new heights,
             our plans deliver everything you need to dominate online.
           </p>
@@ -159,8 +157,8 @@ export default function Pricing() {
                       <li className="flex items-start gap-2">
                         <Check className="w-4 h-4 text-primary mt-0.5" />
                         <span>
-                          <strong>One-Time Setup Fee</strong>: Pay ₦5,000
-                          (Starter) or as per plan (Pro) to set up your website,
+                          <strong>Monthly Fee</strong>: Pay ₦5,000
+                          (Starter) or Pay ₦10,000 as per plan (Pro) to set up your website,
                           including hosting, design, and all features listed in
                           your plan.
                         </span>
@@ -170,8 +168,8 @@ export default function Pricing() {
                         <span>
                           <strong>Domain Cost</strong>: You’ll purchase your
                           domain (e.g., .com, .com.ng, .shop) upfront through a
-                          registrar. Costs vary by domain type (e.g., ~₦7,500
-                          for .com.ng, ~₦10,000 for .com).
+                          registrar. Costs vary by domain type (e.g., ~₦10,000
+                          for .com.ng, ~₦15,000+ for .com)/year.
                         </span>
                       </li>
                       <li className="flex items-start gap-2">
